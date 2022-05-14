@@ -1,23 +1,37 @@
-import './App.css';
+import React, { useCallback, useRef, useState } from 'react';
+import Webcam from 'react-webcam';
+import './App.css'
+import { faceToEmoji } from './actions';
 
-function App() {
+export default function App() {
+  const webcamRef = useRef(null)
+
+  const [imgSrc, setImgSrc] = useState(null)
+
+  const capture = useCallback(() => {
+    const imgSrc = webcamRef.current.getScreenshot()
+    console.log(imgSrc)
+    setImgSrc(imgSrc)
+  }, [webcamRef, setImgSrc])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <div className='container'>
+        <div>
+          {/* <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+          /> */}
+          <button onClick={capture}>
+            Start
+          </button>
+
+          {
+            imgSrc && <img src={imgSrc} alt='img' />
+          }
+        </div>
+      </div>
     </div>
   );
 }
-
-export default App;
