@@ -8,6 +8,7 @@ export default function App() {
   const webcamRef = useRef(null)
 
   const [imgSrc, setImgSrc] = useState(null)
+  const [isGenerating, setIsGenerating] = useState(false)
 
   const capture = useCallback(() => {
     if (!webcamRef || !webcamRef.current) {
@@ -32,15 +33,30 @@ export default function App() {
         />
 
         {/* Button */}
-        <button onClick={capture}>
-          Stop
+        <button
+          onClick={() => {
+            setIsGenerating(!isGenerating)
+          }}>
+          {isGenerating ? 'Stop' : 'Start'}
         </button>
 
         {/* Result */}
         {
-          imgSrc && <div className='result'>
-            Generating...
-          </div>
+          isGenerating ?
+            imgSrc ?
+              <div className='result'>
+                <img
+                  src={imgSrc}
+                  alt='img'
+                />
+              </div> :
+              <div className='result'>
+                Generating...
+              </div> :
+            <div className='result'>
+              Waiting...
+            </div>
+
         }
       </div>
     </div>
