@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Face_Expression_Detection
 
 ## Prerequisites
@@ -12,3 +13,6 @@ sudo chmod a+x ./run.sh
 ./run.sh
 ```
 
+=======
+# Face to Emoji
+>>>>>>> 0dae2b49662dc63f11e079ec6daa5f7cd29a30dc
